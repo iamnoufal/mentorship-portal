@@ -13,9 +13,8 @@ import { useContext, useEffect, useState } from "react";
  * @returns React.Component - A page that displays the current user's mentees
  */
 function MenteesPage() {
-
   // fetch user data from context
-  const { user } = useContext(AppContext);
+  const { user } = useContext(AppContext)
 
   // fetch mentees from API
   const [mentees, setMentees] = useState<Array<UserType> | any>(user.mentees);
