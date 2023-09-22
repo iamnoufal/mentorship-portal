@@ -1,4 +1,4 @@
-# Mentorship Portal
+# Mentorship Portal - mini project
 
 Built with [Next JS](https://nextjs.org) and styled with [Material UI](https://mui.com)
 
