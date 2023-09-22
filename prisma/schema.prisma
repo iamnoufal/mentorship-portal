@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  regno             String     @id @unique
+  name              String
+  email             String     @unique
+  year              String
+  birthday          DateTime?
+  department        String
+  image             String?
+  skills            String?
+  hobbies           String?
+  type              String
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime?  @updatedAt
+  mentorID          String?
+  mentor            User?      @relation("Mentor", fields: [mentorID], references: [regno])
+  mentees           User[]     @relation("Mentor")
+  responses         Response[]
+  form              Form[]
+  assignedFeedbacks Assigned[]
+}
+
+model Form {
+  formID      String     @id @unique @default(cuid())
+  closed      Int        @default(0)
+  createdBy   String
+  admin       User       @relation(fields: [createdBy], references: [regno])
+  title       String
+  description String
+  fields      Field[]
+  responses   Response[]
+  createdAt   DateTime   @default(now())
+  assignedTo  Assigned[]
+}
+
+model Field {
+  id        String   @id @unique @default(cuid())
+  formID    String
+  form      Form     @relation(fields: [formID], references: [formID])
+  label     String
+  type      String
+  choices   String?
+  values    Value[]
+  createdAt DateTime @default(now())
+}
+
+model Response {
+  id          String   @id @unique @default(cuid())
+  regno       String
+  user        User     @relation(fields: [regno], references: [regno])
+  formID      String
+  form        Form     @relation(fields: [formID], references: [formID])
+  values      Value[]
+  submittedAt DateTime @default(now())
+}
+
+model Value {
+  responseID String
+  response   Response @relation(fields: [responseID], references: [id])
+  fieldID    String
+  field      Field    @relation(fields: [fieldID], references: [id])
+  value      String
+
+  @@id([responseID, fieldID])
+}
+
+model Assigned {
+  formID    String
+  regno     String
+  form      Form   @relation(fields: [formID], references: [formID])
+  user      User   @relation(fields: [regno], references: [regno])
+  submitted Int    @default(0)
+
+  @@id([formID, regno])
+}
