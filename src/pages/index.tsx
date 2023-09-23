@@ -87,7 +87,7 @@ export default function IndexPage() {
   return (
     <>
       <Head>
-        <title>EMT Mentorship Portal</title>
+        <title>Mentorship Portal</title>
       </Head>
       <Box id="home">
         {/* <AppBar
