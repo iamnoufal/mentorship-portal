@@ -43,7 +43,7 @@ function LoginPage() {
   return (
     <>
       <Head>
-        <title>Login | EMT Mentorship</title>
+        <title>Login | Mentorship</title>
       </Head>
       <Box
         sx={{

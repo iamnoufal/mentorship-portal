@@ -6,7 +6,7 @@ import Heading from "@/components/Heading";
 
 function AssociateProfilePage({ user }: { user: UserType }) {
   return (
-    <Layout title={user.name + " | EMT Mentorship Portal"}>
+    <Layout title={user.name + " | Mentorship Portal"}>
       <Heading>{user.name}</Heading>
       <Profile user={user} />
     </Layout>

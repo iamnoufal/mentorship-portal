@@ -8,7 +8,7 @@ import Link from "next/link";
 
 function FeedbacksPage({ data }: any) {
   return (
-    <Layout title="Forms | EMT Mentorship Portal">
+    <Layout title="Forms | Mentorship Portal">
       <Protected type="admin">
         <Container maxWidth="md" sx={{ py: 5 }}>
           <Box

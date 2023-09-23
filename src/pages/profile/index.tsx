@@ -11,7 +11,7 @@ function ProfilePage() {
   const { user } = useContext(AppContext);
 
   return (
-    <Layout title="Profile | EMT Mentorship Portal">
+    <Layout title="Profile | Mentorship Portal">
       <Typography variant="h4" textAlign="center">
         Profile
       </Typography>

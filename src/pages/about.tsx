@@ -5,7 +5,7 @@ import { Box, Grid, Paper, Typography } from "@mui/material";
 
 function AboutPage() {
   return (
-    <Layout title="About and Guidelines | EMT Mentorship Tool">
+    <Layout title="About and Guidelines | Mentorship Tool">
       <Heading>Guidelines</Heading>
       <Grid container spacing={3} sx={{ my: 3 }}>
         <Grid item md={6}>

@@ -70,7 +70,7 @@ function ProfilePage() {
   };
 
   return (
-    <Layout title="Edit Profile | EMT Mentorship Portal">
+    <Layout title="Edit Profile | Mentorship Portal">
       <Typography variant="h4" textAlign="center">
         Edit my Profile
       </Typography>

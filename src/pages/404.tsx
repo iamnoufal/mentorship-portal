@@ -5,7 +5,7 @@ import errorImage from "@/assets/images/not_found.webp";
 
 export default function NotFoundPage() {
   return (
-    <Layout title="404 | EMT Mentorship Portal">
+    <Layout title="404 | Mentorship Portal">
       <Box>
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Image src={errorImage} alt="Page not found" />

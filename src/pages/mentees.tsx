@@ -27,7 +27,7 @@ function MenteesPage() {
   // }, []);
 
   return (
-    <Layout title="My Mentees | EMT Mentorship Portal">
+    <Layout title="My Mentees | Mentorship Portal">
       <Protected type="mentor">
         <Heading>My Mentees</Heading>
         {user.mentees?.length == 0 ? (

@@ -51,7 +51,7 @@ function SelectMentorPage({ data }: any) {
   }
 
   return (
-    <Layout title="Select your mentor | EMT Mentorship Portal">
+    <Layout title="Select your mentor | Mentorship Portal">
       <Heading>Select your mentor</Heading>
       <SubHeading>Available Mentors</SubHeading>
       <ListProfiles profiles={data} />

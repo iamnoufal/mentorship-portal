@@ -61,7 +61,7 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
   };
 
   return (
-    <Layout title="Asssociates | EMT Mentorship Portal">
+    <Layout title="Asssociates | Mentorship Portal">
       <Protected type="admin">
         <Box
           sx={{

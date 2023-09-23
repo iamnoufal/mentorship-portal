@@ -10,7 +10,7 @@ function MentorPage() {
   const { user } = useContext(AppContext);
 
   return (
-    <Layout title="Mentors | EMT Mentorship Portal">
+    <Layout title="Mentors | Mentorship Portal">
       <Heading>Your Mentor</Heading>
       {user.type === "admin" ? (
         <Typography textAlign="center" sx={{ mt: 4 }} variant="body1">

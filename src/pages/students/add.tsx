@@ -75,7 +75,7 @@ function AddMenteePage() {
   };
 
   return (
-    <Layout title="Add Students | EMT Mentorship Portal">
+    <Layout title="Add Students | Mentorship Portal">
       <Protected type="admin">
         <Box>
           <Typography variant="h4" textAlign="center">

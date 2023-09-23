@@ -12,7 +12,7 @@ function HomePage() {
   const { user } = useContext(AppContext);
   
   return (
-    <Layout title="EMT Mentorship Portal">
+    <Layout title="Mentorship Portal">
       <Box>
         <Typography variant="button">Welcome</Typography>
         <Typography variant="h4">{user.name}</Typography>
