@@ -18,12 +18,12 @@ export default async function handler(
         data: data,
       })
       .then(() => {
-        return { message: "Associate added successfully", code: 200 };
+        return { message: "Student added successfully", code: 200 };
       })
       .catch((error: Prisma.PrismaClientKnownRequestError | any) => {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return {
-            message: `Associate information with Reg No ${data.regno} already exists.`,
+            message: `Student information with Reg No ${data.regno} already exists.`,
             code: 403,
           };
         }

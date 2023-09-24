@@ -82,7 +82,7 @@ function AddMenteePage() {
       <Protected type="admin">
         <Box>
           <Typography variant="h4" textAlign="center">
-            Add Associate Info
+            Add Student Info
           </Typography>
           <input
             type="file"

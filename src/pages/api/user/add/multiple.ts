@@ -17,7 +17,7 @@ export default async function handler(
       data.skills = data.skills?.join(", ") || "";
       data.hobbies = data.hobbies?.join(", ") || "";
       data = { ...UserDefaultData, ...data };
-      addingData = await prisma.user
+      addingData = prisma.user
         .create({
           data: data,
         })
@@ -28,14 +28,10 @@ export default async function handler(
           }
           return `Internal Server Error => ${error.message}`;
         });
-      if (addingData != true) break;
     }
-    if (addingData == true)
-      return res
-        .status(200)
-        .json({ message: "Associate added successfully", code: 200 });
-    else
-      return res.status(500).json({ message: addingData as string, code: 500 });
+    return res
+      .status(200)
+      .json({ message: "Students added successfully", code: 200 });
   } else {
     return res.status(405).json({ message: `Method not allowed`, code: 405 });
   }
