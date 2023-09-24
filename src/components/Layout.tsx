@@ -267,7 +267,7 @@ function Layout({
                 py: 1,
                 background:
                   theme == "light"
-                    ? ""
+                    ? "white"
                     : "",
               }}
               elevation={trigger ? 4 : 0}

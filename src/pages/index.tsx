@@ -173,12 +173,12 @@ export default function IndexPage() {
                     mt: 2,
                   }}
                   variant="contained"
-                  onClick={handleScroll}
+                  onClick={() => signIn("google")}
                 >
                   Get Started
                 </Button>
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -236,7 +236,7 @@ export default function IndexPage() {
                     </Button>
                   </Box>
                 </Paper>
-              </Box>
+              </Box> */}
             </Grid>
             <Grid item xs={12} md={6}></Grid>
           </Grid>
