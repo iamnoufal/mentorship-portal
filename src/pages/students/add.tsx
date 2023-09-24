@@ -47,7 +47,6 @@ function AddMenteePage() {
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
       let data : Array<UserType> = utils.sheet_to_json(worksheet);
       data = data.map((d: UserType) => Object({ ...d, regno: d.regno.toString(), year: d.year.toString() }));
-      console.log(data)
       setBulkData(data);
     };
     reader.readAsArrayBuffer(file);
@@ -57,7 +56,6 @@ function AddMenteePage() {
   const handleSubmit = () => {
     setSaving(true);
     if (bulkData) {
-      console.log("adding bulk data")
       for (let i = 0; i<bulkData.length; i++) {
         fetch("/api/user/add", {
           method: "POST",
@@ -70,7 +68,6 @@ function AddMenteePage() {
           .then((data) => {
             console.log(data.message)
             if (data.code == 200) {
-              console.log(i, bulkData.length)
               if (i == bulkData.length-1) {
                 setBulkData(undefined)
                 setSaving(false);
