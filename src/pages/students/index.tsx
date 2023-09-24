@@ -17,16 +17,17 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
       // filtering out admins and mentors from the data to set mentors state
       .filter((d: { type: string }) => d.type == "mentor" || d.type == "admin")
       // mapping the data to get only the regno
-      .map((d: { regno: any }) => d.regno)
+      .map((d: { email: any }) => d.email)
   );
 
   // router for navigation
   const router = useRouter();
 
   // handle change in mentor switch
-  const handleChangeMentor = async (regno: string) => {
-    if (mentors?.indexOf(regno) == -1) {
-      fetch(`/api/user/${regno}`, {
+  const handleChangeMentor = async (email: string) => {
+    if (mentors?.indexOf(email) == -1) {
+      console.log("adding as mentor")
+      fetch(`/api/user/${email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "mentor" }),
         headers: {
@@ -37,12 +38,13 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
         .then((data) => {
           if (data.code == 200) {
             let m = mentors;
-            m.push(regno);
+            m.push(email);
             setMentors(m);
           }
         });
     } else {
-      fetch(`/api/user/${regno}`, {
+      console.log("removing as mentor")
+      fetch(`/api/user/${email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "student" }),
         headers: {
@@ -53,7 +55,7 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
         .then((data) => {
           if (data.code == 200) {
             let m = mentors;
-            m?.splice(m.indexOf(regno), 1);
+            m?.splice(m.indexOf(email), 1);
             setMentors(m);
           }
         });
@@ -85,21 +87,21 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
               Object({
                 ...d,
                 actions: [
-                  <Tooltip key={d.regno + "mentorbutton"} title="Mentor">
+                  <Tooltip key={d.email + "mentorbutton"} title="Mentor">
                     <span>
                       <Switch
                         defaultChecked={d.type == "mentor" || d.type == "admin"}
                         disabled={d.type == "admin"}
-                        onChange={(e: ChangeEvent) => handleChangeMentor(d.regno)}
+                        onChange={(e: ChangeEvent) => handleChangeMentor(d.email)}
                         size="small"
                       />
                     </span>
                   </Tooltip>,
-                  <Tooltip key={d.regno + "deleteuser"} title="Delete User">
+                  <Tooltip key={d.email + "deleteuser"} title="Delete User">
                     <span>
                       <IconButton
                         onClick={() => {
-                          fetch(`/api/user/${d.regno}`, {
+                          fetch(`/api/user/${d.email}`, {
                             method: "DELETE",
                           }).then((r) => {
                             if (r.status == 200) {

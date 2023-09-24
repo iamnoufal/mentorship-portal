@@ -258,7 +258,7 @@ function Layout({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Box sx={{ display: "flex" }}>
             <CssBaseline />
-            {/* <AppBar
+            <AppBar
               position="fixed"
               sx={{
                 width: { md: `calc(100% - ${drawerWidth}px)` },
@@ -267,17 +267,17 @@ function Layout({
                 py: 1,
                 background:
                   theme == "light"
-                    ? "linear-gradient(to bottom, #ffffff, #f2f2f2)"
+                    ? ""
                     : "",
               }}
               elevation={trigger ? 4 : 0}
             >
               <Toolbar sx={{ justifyContent: "space-between" }}>
-                <Image
+                {/* <Image
                   src={logo}
                   style={{ width: "auto", height: "100%" }}
                   alt="Bosch Global Software Technologies"
-                />
+                /> */}
                 <IconButton
                   edge="start"
                   onClick={() => setOpenDrawer(!openDrawer)}
@@ -286,7 +286,7 @@ function Layout({
                   <MenuIcon />
                 </IconButton>
               </Toolbar>
-            </AppBar> */}
+            </AppBar>
             <Box
               component="nav"
               sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}

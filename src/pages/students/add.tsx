@@ -66,7 +66,6 @@ function AddMenteePage() {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data.message)
             if (data.code == 200) {
               setBulkData(undefined);
               setSaving(false);

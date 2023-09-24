@@ -70,6 +70,7 @@ export default async function handler(
       })
       .then(() => Object({ message: "User updated successfully", code: 200 }))
       .catch((e) => Object({ message: e.message, code: 500 }));
+    console.log(resp)
     return res.status(resp.code).json(resp);
   } else if (req.method == "DELETE") {
     let user = await prisma.user
@@ -81,5 +82,7 @@ export default async function handler(
       .then(() => Object({ message: "User deleted successfully", code: 200 }))
       .catch((e) => Object({ message: e.message, code: 500 }));
     return res.status(user.code).json(user);
+  } else {
+    return res.status(405).json({ message: `Method not allowed`, code: 405 });
   }
 }

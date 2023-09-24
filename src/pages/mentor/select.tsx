@@ -25,11 +25,10 @@ function SelectMentorPage({ data }: any) {
     if (
       confirm(`Are you sure you want to select ${data.name} as your mentor?`)
     ) {
-      fetch("/api/mentor/assign", {
-        method: "POST",
+      fetch("/api/user/"+user.email, {
+        method: "PUT",
         body: JSON.stringify({
-          regno: user.regno,
-          mentorID: data.regno,
+          mentorID: data.email,
         }),
         headers: {
           "Content-Type": "application/json",
