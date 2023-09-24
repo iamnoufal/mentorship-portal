@@ -13,17 +13,18 @@ export default async function handler(
     let data = req.body;
     data.skills = data.skills?.join(", ") || "";
     data.hobbies = data.hobbies?.join(", ") || "";
+    data.type = data.type || "student";
     let resp = await prisma.user
       .create({
         data: data,
       })
       .then(() => {
-        return { message: "Student added successfully", code: 200 };
+        return { message: "Associate added successfully", code: 200 };
       })
       .catch((error: Prisma.PrismaClientKnownRequestError | any) => {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return {
-            message: `Student information with Reg No ${data.regno} already exists.`,
+            message: `Associate information with Reg No ${data.regno} already exists.`,
             code: 403,
           };
         }

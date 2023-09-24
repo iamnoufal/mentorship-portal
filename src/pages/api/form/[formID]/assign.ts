@@ -28,7 +28,7 @@ export default async function handler(
       })
       .then(() => {
         return {
-          message: "Student assigned to feedback successfully",
+          message: "Associate assigned to feedback successfully",
           code: 200,
         };
       })

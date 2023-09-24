@@ -22,7 +22,7 @@ export default async function handler(
       })
       .then(() => {
         return {
-          message: "Student unassigned to feedback successfully",
+          message: "Associate unassigned to feedback successfully",
           code: 200,
         };
       })

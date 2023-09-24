@@ -4,7 +4,7 @@ import Profile from "@/components/Profile";
 import { UserType } from "@/utils/types";
 import Heading from "@/components/Heading";
 
-function StudentProfilePage({ user }: { user: UserType }) {
+function AssociateProfilePage({ user }: { user: UserType }) {
   return (
     <Layout title={user.name + " | Mentorship Portal"}>
       <Heading>{user.name}</Heading>
@@ -26,4 +26,4 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default StudentProfilePage;
+export default AssociateProfilePage;

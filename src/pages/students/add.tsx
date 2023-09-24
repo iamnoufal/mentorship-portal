@@ -56,25 +56,52 @@ function AddMenteePage() {
   // function to handle form submit
   const handleSubmit = () => {
     setSaving(true);
-    fetch(bulkData ? "/api/user/add/multiple" : "/api/user/add", {
-      method: "POST",
-      body: JSON.stringify(bulkData ? bulkData : user),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.code == 200) {
-          setUser(UserDefaultData);
-          setBulkData(undefined)
-        } else {
-          setAlert(data.message);
-        }
-        setSaving(false);
-        setSaved(true);
-        setTimeout(() => setSaved(false), 5000)
-      });
+    if (bulkData) {
+      console.log("adding bulk data")
+      for (let i = 0; i<bulkData.length; i++) {
+        fetch("/api/user/add", {
+          method: "POST",
+          body: JSON.stringify(bulkData[i]),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data.message)
+            if (data.code == 200) {
+              console.log(i, bulkData.length)
+              if (i == bulkData.length-1) {
+                setBulkData(undefined)
+                setSaving(false);
+                setSaved(true);
+                setTimeout(() => setSaved(false), 5000)
+              } 
+            } else {
+              setAlert(data.message);
+            }
+          });
+      }
+    } else {
+      fetch("/api/user/add", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.code == 200) {
+            setUser(UserDefaultData);
+          } else {
+            setAlert(data.message);
+          }
+          setSaving(false);
+          setSaved(true);
+          setTimeout(() => setSaved(false), 5000)
+        });
+    }
   };
 
   return (
