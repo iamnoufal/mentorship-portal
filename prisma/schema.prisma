@@ -11,9 +11,9 @@ datasource db {
 }
 
 model User {
-  regno             String     @id @unique
+  email             String     @id @unique
+  regno             String     @unique
   name              String
-  email             String     @unique
   year              String
   birthday          DateTime?
   department        String
@@ -24,7 +24,7 @@ model User {
   createdAt         DateTime   @default(now())
   updatedAt         DateTime?  @updatedAt
   mentorID          String?
-  mentor            User?      @relation("Mentor", fields: [mentorID], references: [regno])
+  mentor            User?      @relation("Mentor", fields: [mentorID], references: [email])
   mentees           User[]     @relation("Mentor")
   responses         Response[]
   form              Form[]
@@ -35,7 +35,7 @@ model Form {
   formID      String     @id @unique @default(cuid())
   closed      Int        @default(0)
   createdBy   String
-  admin       User       @relation(fields: [createdBy], references: [regno])
+  admin       User       @relation(fields: [createdBy], references: [email])
   title       String
   description String
   fields      Field[]
@@ -57,8 +57,8 @@ model Field {
 
 model Response {
   id          String   @id @unique @default(cuid())
-  regno       String
-  user        User     @relation(fields: [regno], references: [regno])
+  email       String
+  user        User     @relation(fields: [email], references: [email])
   formID      String
   form        Form     @relation(fields: [formID], references: [formID])
   values      Value[]
@@ -77,10 +77,10 @@ model Value {
 
 model Assigned {
   formID    String
-  regno     String
+  email     String
   form      Form   @relation(fields: [formID], references: [formID])
-  user      User   @relation(fields: [regno], references: [regno])
+  user      User   @relation(fields: [email], references: [email])
   submitted Int    @default(0)
 
-  @@id([formID, regno])
+  @@id([formID, email])
 }

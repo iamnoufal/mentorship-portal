@@ -44,7 +44,7 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
     } else {
       fetch(`/api/user/${regno}`, {
         method: "PUT",
-        body: JSON.stringify({ type: "associate" }),
+        body: JSON.stringify({ type: "student" }),
         headers: {
           "Content-Type": "application/json",
         },

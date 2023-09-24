@@ -8,6 +8,6 @@ export default async function handler(
   res: NextApiResponse<Array<UserType> | unknown>
 ) {
   let data =
-    await prisma.$queryRaw`select regno, name, email, department, image, year from User where regno not in (select mentorID from User where mentorID not null group by mentorID having count(mentorID)>=3) and (type=='admin' or type=='mentor')`;
+    await prisma.$queryRaw`select regno, name, email, department, image, year from User where email not in (select mentorID from User where mentorID not null group by mentorID having count(mentorID)>=3) and (type=='admin' or type=='mentor')`;
   return res.status(200).json(data);
 }

@@ -16,7 +16,7 @@ function LoginPage() {
   // redirect the user to home page if the regno exists in session
   useEffect(() => {
     if (window) {
-      if (sessionStorage.getItem("regno")) {
+      if (sessionStorage.getItem("email")) {
         router.push("/home");
       }
     }

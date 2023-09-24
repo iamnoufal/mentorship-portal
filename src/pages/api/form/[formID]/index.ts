@@ -25,6 +25,7 @@ export default async function handler(
                 select: {
                   name: true,
                   department: true,
+                  email: true,
                   regno: true,
                 },
               },
@@ -33,7 +34,7 @@ export default async function handler(
           },
           assignedTo: {
             select: {
-              regno: true,
+              email: true,
             },
           },
         },
@@ -48,7 +49,7 @@ export default async function handler(
       .create({
         data: {
           formID: formID,
-          regno: data.regno,
+          email: data.email,
           values: {
             create: data.values.map((v: { value: string | number }) =>
               Object({ ...v, value: v.value.toString() })
@@ -60,9 +61,9 @@ export default async function handler(
         return prisma.assigned
           .update({
             where: {
-              formID_regno: {
+              formID_email: {
                 formID,
-                regno: data.regno,
+                email: data.email,
               },
             },
             data: {

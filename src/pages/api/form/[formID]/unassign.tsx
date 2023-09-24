@@ -14,9 +14,9 @@ export default async function handler(
     let resp = await prisma.assigned
       .delete({
         where: {
-          formID_regno: {
+          formID_email: {
             formID,
-            regno: data.regno,
+            email: data.email,
           },
         },
       })

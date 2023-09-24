@@ -45,8 +45,9 @@ function AddMenteePage() {
       const buffer = e.target?.result;
       const workbook = read(buffer, { type: "binary" });
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      let data = utils.sheet_to_json(worksheet);
-      data = data.map((d) => d as UserType);
+      let data : Array<UserType> = utils.sheet_to_json(worksheet);
+      data = data.map((d: UserType) => Object({ ...d, regno: d.regno.toString(), year: d.year.toString() }));
+      console.log(data)
       setBulkData(data);
     };
     reader.readAsArrayBuffer(file);
@@ -66,11 +67,13 @@ function AddMenteePage() {
       .then((data) => {
         if (data.code == 200) {
           setUser(UserDefaultData);
+          setBulkData(undefined)
         } else {
           setAlert(data.message);
         }
         setSaving(false);
         setSaved(true);
+        setTimeout(() => setSaved(false), 5000)
       });
   };
 

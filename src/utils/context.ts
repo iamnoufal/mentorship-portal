@@ -8,7 +8,7 @@ export const UserDefaultData: UserType = {
   year: "",
   email: "",
   department: "",
-  type: "associate",
+  type: "student",
 };
 
 // creating context

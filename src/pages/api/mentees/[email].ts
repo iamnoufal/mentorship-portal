@@ -7,10 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Array<UserType> | unknown>
 ) {
-  let { regno }: { [key: string]: any } = req.query;
+  let { email }: { [key: string]: any } = req.query;
   let data = await prisma.user.findMany({
     where: {
-      mentorID: regno.toUpperCase(),
+      mentorID: email,
     },
     select: {
       name: true,

@@ -14,12 +14,12 @@ export default async function handler(
 ) {
   if (req.method == "POST") {
     const data = req.body;
-    const regno = data["regno"];
+    const email = data["email"];
     const mentorID = data.mentorID;
     const resp = await prisma.user
       .update({
         where: {
-          regno: data["regno"],
+          email: data["email"],
         },
         data: {
           mentorID: data["mentorID"],
@@ -38,7 +38,7 @@ export default async function handler(
       .catch((error: Prisma.PrismaClientKnownRequestError | any) => {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return {
-            message: `Mentor/User with Reg No ${mentorID}/${regno} doesn't exist`,
+            message: `Mentor/User with email ${mentorID}/${email} doesn't exist`,
             code: 403,
           };
         }

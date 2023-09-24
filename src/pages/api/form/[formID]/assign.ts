@@ -21,7 +21,7 @@ export default async function handler(
           },
           user: {
             connect: {
-              regno: data.regno,
+              email: data.email,
             },
           },
         },

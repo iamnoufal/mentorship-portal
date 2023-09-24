@@ -13,7 +13,7 @@ export default async function handler(
         include: {
           responses: {
             select: {
-              regno: true,
+              email: true,
             },
           },
         },

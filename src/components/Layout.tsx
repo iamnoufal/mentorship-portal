@@ -100,7 +100,7 @@ function Layout({
         }
       })
       .catch((err) => {
-        sessionStorage.removeItem("regno");
+        sessionStorage.removeItem("email");
         sessionStorage.setItem("next", router.asPath);
         router.push("/");
       });
@@ -120,7 +120,7 @@ function Layout({
   };
 
   const logout = () => {
-    sessionStorage.removeItem("regno");
+    sessionStorage.removeItem("email");
     router.push("/");
   };
 
