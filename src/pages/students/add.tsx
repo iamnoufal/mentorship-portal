@@ -56,10 +56,10 @@ function AddMenteePage() {
   const handleSubmit = () => {
     setSaving(true);
     if (bulkData) {
-      for (let i = 0; i<bulkData.length; i++) {
-        fetch("/api/user/add", {
+      for (let i = 0; i<bulkData.length; i+=20) {
+        fetch("/api/user/add/multiple", {
           method: "POST",
-          body: JSON.stringify(bulkData[i]),
+          body: JSON.stringify(bulkData.slice(i, i+20)),
           headers: {
             "Content-Type": "application/json",
           },
@@ -68,12 +68,10 @@ function AddMenteePage() {
           .then((data) => {
             console.log(data.message)
             if (data.code == 200) {
-              if (i == bulkData.length-1) {
-                setBulkData(undefined)
-                setSaving(false);
-                setSaved(true);
-                setTimeout(() => setSaved(false), 5000)
-              } 
+              setBulkData(undefined);
+              setSaving(false);
+              setSaved(true);
+              setTimeout(() => setSaved(false), 5000)
             } else {
               setAlert(data.message);
             }
