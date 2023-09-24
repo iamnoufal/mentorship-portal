@@ -8,7 +8,16 @@ export default async function handler(
   res: NextApiResponse<Array<UserType> | Response>
 ) {
   if (req.method == "GET") {
-    let allData = await prisma.user.findMany();
+    let allData = await prisma.user.findMany({
+      orderBy: [
+        {
+          year: "asc",
+        },
+        {
+          name: "asc",
+        }
+      ]
+    });
     let data = allData.map(
       (d) =>
         Object({
