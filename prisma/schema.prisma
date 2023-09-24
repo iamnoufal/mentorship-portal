@@ -29,6 +29,7 @@ model User {
   responses         Response[]
   form              Form[]
   assignedFeedbacks Assigned[]
+  tasks             Task[]
 }
 
 model Form {
@@ -83,4 +84,20 @@ model Assigned {
   submitted Int    @default(0)
 
   @@id([formID, email])
+}
+
+model Task {
+  taskID       String        @id @unique @default(cuid())
+  title        String?
+  mentorID     String
+  user         User          @relation(fields: [mentorID], references: [regno])
+  createdAt    DateTime      @default(now())
+  descriptions Description[]
+}
+
+model Description {
+  descriptionID String @id @unique @default(cuid())
+  taskID        String
+  task          Task   @relation(fields: [taskID], references: [taskID])
+  description   String
 }
