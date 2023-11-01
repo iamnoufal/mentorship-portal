@@ -4,7 +4,7 @@ import Profile from "@/components/Profile";
 import { UserType } from "@/utils/types";
 import Heading from "@/components/Heading";
 
-function AssociateProfilePage({ user }: { user: UserType }) {
+function StudentProfilePage({ user }: { user: UserType }) {
   return (
     <Layout title={user.name + " | Mentorship Portal"}>
       <Heading>{user.name}</Heading>
@@ -13,12 +13,11 @@ function AssociateProfilePage({ user }: { user: UserType }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { email } = context.query;
+export async function getStaticProps({ params } : any) {
+  const email = params.email;
   const res = await fetch(`${process.env.BACKEND_URI}/user/${email}`);
   const user = await res.json();
   if (res.status != 200 || user == null) return { notFound: true };
-  console.log(user)
   return {
     props: {
       user,
@@ -26,4 +25,19 @@ export async function getServerSideProps(context: any) {
   };
 }
 
-export default AssociateProfilePage;
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.BACKEND_URI}/user/all`);
+  const data = await res.json();
+  return {
+    paths: data.map((user : UserType) => {
+      return {
+        params: {
+          email: user.email,
+        },
+      };
+    }),
+    fallback: "blocking",
+  };
+}
+
+export default StudentProfilePage;

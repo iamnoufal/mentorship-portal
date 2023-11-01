@@ -133,10 +133,10 @@ function Layout({
       label: "Mentor",
       to: "/mentor",
     },
-    // {
-    //   label: "Feedbacks",
-    //   to: "/feedback",
-    // },
+    {
+      label: "Assigned Tasks",
+      to: "/assigned",
+    },
   ];
 
   const mentorLinks = [
@@ -151,10 +151,10 @@ function Layout({
       label: "Students",
       to: "/students",
     },
-    // {
-    //   label: "All Feedbacks",
-    //   to: "/forms",
-    // },
+    {
+      label: "Tasks",
+      to: "/tasks",
+    },
   ];
 
   const drawerWidth = 240;

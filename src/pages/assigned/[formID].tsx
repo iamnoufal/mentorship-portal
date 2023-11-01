@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Layout from "@/components/Layout";
-import { ResponseType } from "@/utils/types";
+import { FormType, ResponseType } from "@/utils/types";
 import Heading from "@/components/Heading";
 import SubHeading from "@/components/SubHeading";
 import { AppContext } from "@/utils/context";
@@ -115,8 +115,8 @@ function FeedbackFormPage({ form }: any) {
 }
 
 // fetch form data from API before rendering page
-export async function getServerSideProps(context: any) {
-  const { formID } = context.query;
+export async function getStaticProps({ params } : any) {
+  const formID = params.formID;
   const res = await fetch(`${process.env.BACKEND_URI}/form/${formID}/get`);
   const form = await res.json();
   if (res.status != 200 || form == null) return { notFound: true };
@@ -126,5 +126,21 @@ export async function getServerSideProps(context: any) {
     },
   };
 }
+
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.BACKEND_URI}/form/all`);
+  const data = await res.json();
+  return {
+    paths: data.map((form : FormType) => {
+      return {
+        params: {
+          formID: form.formID,
+        },
+      };
+    }),
+    fallback: "blocking",
+  };
+}
+
 
 export default FeedbackFormPage;

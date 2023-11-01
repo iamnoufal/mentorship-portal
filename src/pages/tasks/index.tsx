@@ -6,7 +6,7 @@ import { Container, Button, Box } from "@mui/material";
 import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
 import Link from "next/link";
 
-function FeedbacksPage({ data }: any) {
+function TasksPage({ data }: any) {
   return (
     <Layout title="Forms | Mentorship Portal">
       <Protected type="admin">
@@ -20,8 +20,8 @@ function FeedbacksPage({ data }: any) {
               mb: 4,
             }}
           >
-            <Heading align="left">Forms</Heading>
-            <Link href="/forms/create">
+            <Heading align="left">Tasks</Heading>
+            <Link href="/tasks/create">
               <Button variant="contained">
                 New <ControlPointRoundedIcon sx={{ ml: 1, fontSize: 18 }} />
               </Button>
@@ -35,10 +35,10 @@ function FeedbacksPage({ data }: any) {
 }
 
 // fetch all forms from backend
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const resp = await fetch(`${process.env.BACKEND_URI}/form/all`);
   const data = await resp.json();
   return { props: { data } };
 }
 
-export default FeedbacksPage;
+export default TasksPage;

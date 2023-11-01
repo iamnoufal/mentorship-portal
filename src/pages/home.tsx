@@ -160,7 +160,7 @@ function HomePage() {
                   </Card>
                 </Link>
                 <Link
-                  href="/forms"
+                  href="/tasks"
                   style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
                 >
                   <Card
@@ -168,13 +168,13 @@ function HomePage() {
                   >
                     <Box sx={{ mr: 2 }}>
                       <Typography variant="body2">View all</Typography>
-                      <Typography variant="h5">Forms</Typography>
+                      <Typography variant="h5">Tasks</Typography>
                     </Box>
                     <ChevronRightRoundedIcon fontSize="large" />
                   </Card>
                 </Link>
                 <Link
-                  href="/forms/create"
+                  href="/tasks/create"
                   style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
                 >
                   <Card
@@ -182,7 +182,7 @@ function HomePage() {
                   >
                     <Box sx={{ mr: 2 }}>
                       <Typography variant="body2">Create a</Typography>
-                      <Typography variant="h5">New Form</Typography>
+                      <Typography variant="h5">New Task</Typography>
                     </Box>
                     <ChevronRightRoundedIcon fontSize="large" />
                   </Card>

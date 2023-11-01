@@ -34,7 +34,7 @@ function CreateFormPage() {
 
   // form state
   const [form, setForm] = useState<FormType>({
-    createdBy: user.regno,
+    createdBy: user.email,
     title: "",
     description: "",
     fields: [],
@@ -77,18 +77,19 @@ function CreateFormPage() {
     }
     fetch(`/api/form/create`, {
       method: "POST",
-      body: JSON.stringify({ ...form, createdBy: user.regno }),
+      body: JSON.stringify({ ...form, createdBy: user.email }),
       headers: {
         "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if (data.code == 200) {
           editField("link", data.link, setForm);
           setSaved(true);
         } else {
-          alert("Cannot save your feedback. Try again later");
+          alert("Cannot save your task. Try again later");
         }
         setSaving(false);
       });
@@ -98,7 +99,7 @@ function CreateFormPage() {
     <Layout title="Create Form | Mentorship Portal">
       <Protected type="admin">
         <Container maxWidth="md" sx={{ py: 2 }}>
-          <Heading>Create a Feedback form</Heading>
+          <Heading>Create a Task</Heading>
           <Box sx={{ py: 3 }}>
             <Paper elevation={theme == "dark" ? 8 : 4} sx={{ px: 3, py: 2 }}>
               <Grid container>
@@ -108,7 +109,7 @@ function CreateFormPage() {
                   lg={4}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="h6">Feedback Title</Typography>
+                  <Typography variant="h6">Task Title</Typography>
                 </Grid>
                 <Grid
                   item
@@ -133,7 +134,7 @@ function CreateFormPage() {
                   lg={4}
                   sx={{ display: "flex", alignItems: "center" }}
                 >
-                  <Typography variant="h6">Feedback Description</Typography>
+                  <Typography variant="h6">Task Description</Typography>
                 </Grid>
                 <Grid item xs={12} lg={8}>
                   <TextField
@@ -174,13 +175,13 @@ function CreateFormPage() {
                           setForm
                         )
                       }
-                      label="Question"
+                      label="Milestone"
                     />
                     <Box sx={{ my: 2 }}>
                       {field.type === "text" ? (
                         <TextField
                           sx={{ width: "100%" }}
-                          value="Text Field"
+                          value="Milestone feedback"
                           multiline
                           rows={2}
                           disabled={true}
@@ -226,28 +227,25 @@ function CreateFormPage() {
               sx={{ my: 3 }}
             >
               <Button variant="contained" onClick={addField}>
-                Add text field
+                Add Milestone
               </Button>
-              <Button variant="contained" onClick={addRating}>
-                Add rating
-              </Button>
+              <LoadingButton
+                onClick={saved ? console.log : handleSubmit}
+                loading={saving}
+                loadingPosition="start"
+                color={saved ? "success" : "primary"}
+                startIcon={saved ? <CheckCircleOutlineIcon /> : <SaveIcon />}
+                variant="contained"
+                sx={{ mt: 3 }}
+              >
+                <span>{saved ? "Created!" : "Create"}</span>
+              </LoadingButton>
             </Stack>
-            <LoadingButton
-              onClick={saved ? console.log : handleSubmit}
-              loading={saving}
-              loadingPosition="start"
-              color={saved ? "success" : "primary"}
-              startIcon={saved ? <CheckCircleOutlineIcon /> : <SaveIcon />}
-              variant="contained"
-              sx={{ width: "100%", mt: 3 }}
-            >
-              <span>{saved ? "Created!" : "Create"}</span>
-            </LoadingButton>
           </Box>
           <Alert
             title="Success"
             message="Feedback form created successfully"
-            next={() => router.push(form.link.replace("feedback", "forms"))}
+            next={() => router.push(form.link.replace("assigned", "tasks"))}
             open={saved}
           />
         </Container>

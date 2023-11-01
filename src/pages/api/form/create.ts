@@ -25,7 +25,7 @@ export default async function handler(
         return {
           message: "Form created and published successfully",
           code: 200,
-          link: `${process.env.NEXT_PUBLIC_BASE_URI}/feedback/${res.formID}`,
+          link: `${process.env.NEXT_PUBLIC_BASE_URI}/assigned/${res.formID}`,
         };
       })
       .catch((error: Prisma.PrismaClientKnownRequestError | any) => {

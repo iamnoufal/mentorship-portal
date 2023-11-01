@@ -72,7 +72,7 @@ function ResponsesPage({ form }: { form: FormType }) {
   const [users, setUsers] = useState<Array<UserType>>([user]);
   // set assigned users state, state values can be Array<string>
   const [assignedUsers, setAssignedUsers] = useState<Array<any> | undefined>(
-    form.assignedTo?.map((f) => f.regno)
+    form.assignedTo?.map((f) => f.email)
   );
 
   // Row component for responses table to render each response
@@ -163,12 +163,12 @@ function ResponsesPage({ form }: { form: FormType }) {
               }}
             >
               <IconButton
-                onClick={() => router.push(`/feedback/${form.formID}`)}
+                onClick={() => router.push(`/assigned/${form.formID}`)}
               >
                 <RemoveRedEyeRoundedIcon />
               </IconButton>
               <CopyButton
-                text={`${process.env.NEXT_PUBLIC_BASE_URI}/feedback/${form.formID}`}
+                text={`${process.env.NEXT_PUBLIC_BASE_URI}/assigned/${form.formID}`}
               />
               <IconButton
                 onClick={() =>
@@ -232,56 +232,68 @@ function ResponsesPage({ form }: { form: FormType }) {
                 )}
               </TabPanel>
               <TabPanel value="assign">
-                <BulkDataGrid
-                  data={users.map((d) => {
-                    const handleAssignment = (value: string) => {
-                      if (assignedUsers?.indexOf(value) == -1) {
-                        fetch(`/api/form/${router.query.formID}/assign`, {
-                          method: "POST",
-                          body: JSON.stringify({ regno: value }),
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                        })
-                          .then((res) => res.json())
-                          .then((data) => {
-                            if (data.code == 200) {
-                              let au = assignedUsers;
-                              au?.push(value);
-                              setAssignedUsers(au);
+                {/* {user.mentees!.length > 0 ? ( */}
+                  <BulkDataGrid
+                    data={users.map((d) => {
+                      const handleAssignment = (value: string) => {
+                        if (assignedUsers?.indexOf(value) == -1) {
+                          console.log("assigning");
+                          fetch(`/api/form/${router.query.formID}/assign`, {
+                            method: "POST",
+                            body: JSON.stringify({ email: value }),
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          })
+                            .then((res) => res.json())
+                            .then((data) => {
+                              if (data.code == 200) {
+                                let au = assignedUsers;
+                                au?.push(value);
+                                setAssignedUsers(au);
+                              }
+                            });
+                        } else {
+                          console.log("unassigning");
+                          fetch(`/api/form/${router.query.formID}/unassign`, {
+                            method: "POST",
+                            body: JSON.stringify({ email: value }),
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          })
+                            .then((res) => res.json())
+                            .then((data) => {
+                              if (data.code == 200) {
+                                let au = assignedUsers;
+                                au?.splice(au.indexOf(value), 1);
+                                setAssignedUsers(au);
+                              }
+                            });
+                        }
+                      };
+                      return Object({
+                        assign: (
+                          <Checkbox
+                            onClick={() => handleAssignment(d.email)}
+                            defaultChecked={
+                              assignedUsers?.indexOf(d.email) != -1
                             }
-                          });
-                      } else {
-                        fetch(`/api/form/${router.query.formID}/unassign`, {
-                          method: "POST",
-                          body: JSON.stringify({ regno: value }),
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                        })
-                          .then((res) => res.json())
-                          .then((data) => {
-                            if (data.code == 200) {
-                              let au = assignedUsers;
-                              au?.splice(au.indexOf(value), 1);
-                              setAssignedUsers(au);
-                            }
-                          });
-                      }
-                    };
-                    return Object({
-                      assign: (
-                        <Checkbox
-                          onClick={() => handleAssignment(d.regno)}
-                          defaultChecked={assignedUsers?.indexOf(d.regno) != -1}
-                        />
-                      ),
-                      regno: d.regno,
-                      name: d.name,
-                      department: d.department,
-                    });
-                  })}
-                />
+                          />
+                        ),
+                        regno: d.regno,
+                        name: d.name,
+                        department: d.department,
+                      });
+                    })}
+                  />
+                {/* ) : (
+                  <Box>
+                    <Typography>
+                      You don't have mentees to assign task
+                    </Typography>
+                  </Box>
+                )} */}
               </TabPanel>
             </TabContext>
           </Paper>
@@ -321,8 +333,8 @@ function ResponsesPage({ form }: { form: FormType }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { formID } = context.query;
+export async function getStaticProps({ params } : any) {
+  const formID = params.formID;
   const res = await fetch(`${process.env.BACKEND_URI}/form/${formID}`);
   const form = await res.json();
   if (res.status != 200 || form == null) return { notFound: true };
@@ -332,5 +344,21 @@ export async function getServerSideProps(context: any) {
     },
   };
 }
+
+export async function getStaticPaths() {
+  const res = await fetch(`${process.env.BACKEND_URI}/form/all`);
+  const data = await res.json();
+  return {
+    paths: data.map((form : FormType) => {
+      return {
+        params: {
+          formID: form.formID,
+        },
+      };
+    }),
+    fallback: "blocking",
+  };
+}
+
 
 export default ResponsesPage;

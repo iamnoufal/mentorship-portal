@@ -26,7 +26,6 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
   // handle change in mentor switch
   const handleChangeMentor = async (email: string) => {
     if (mentors?.indexOf(email) == -1) {
-      console.log("adding as mentor")
       fetch(`/api/user/${email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "mentor" }),
@@ -43,7 +42,6 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
           }
         });
     } else {
-      console.log("removing as mentor")
       fetch(`/api/user/${email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "student" }),

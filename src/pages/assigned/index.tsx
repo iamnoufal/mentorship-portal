@@ -16,8 +16,8 @@ function FeedbacksPage() {
       .map((form) => form.form) || [];
 
   return (
-    <Layout title="Feedbacks | Mentorship Portal">
-      <Heading>Feedbacks</Heading>
+    <Layout title="Tasks | Mentorship Portal">
+      <Heading>Assigned Tasks</Heading>
       <Container maxWidth="md" sx={{ py: 5 }}>
         <FormList data={data} />
       </Container>
