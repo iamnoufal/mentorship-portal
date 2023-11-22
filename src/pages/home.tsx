@@ -129,6 +129,34 @@ function HomePage() {
                 <ChevronRightRoundedIcon fontSize="large" />
               </Card>
             </Link>
+            <Link
+              href="/tasks"
+              style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
+            >
+              <Card
+                sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", px: 3, py: 2 }}
+              >
+                <Box sx={{ mr: 2 }}>
+                  <Typography variant="body2">View all</Typography>
+                  <Typography variant="h5">Tasks</Typography>
+                </Box>
+                <ChevronRightRoundedIcon fontSize="large" />
+              </Card>
+            </Link>
+            <Link
+              href="/tasks/create"
+              style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
+            >
+              <Card
+                sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", px: 3, py: 2 }}
+              >
+                <Box sx={{ mr: 2 }}>
+                  <Typography variant="body2">Create a</Typography>
+                  <Typography variant="h5">New Task</Typography>
+                </Box>
+                <ChevronRightRoundedIcon fontSize="large" />
+              </Card>
+            </Link>
             {user.type === "admin" && (
               <Fragment>
                 <Link
@@ -155,34 +183,6 @@ function HomePage() {
                     <Box sx={{ mr: 2 }}>
                       <Typography variant="body2">Add new</Typography>
                       <Typography variant="h5">Students</Typography>
-                    </Box>
-                    <ChevronRightRoundedIcon fontSize="large" />
-                  </Card>
-                </Link>
-                <Link
-                  href="/tasks"
-                  style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
-                >
-                  <Card
-                    sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", px: 3, py: 2 }}
-                  >
-                    <Box sx={{ mr: 2 }}>
-                      <Typography variant="body2">View all</Typography>
-                      <Typography variant="h5">Tasks</Typography>
-                    </Box>
-                    <ChevronRightRoundedIcon fontSize="large" />
-                  </Card>
-                </Link>
-                <Link
-                  href="/tasks/create"
-                  style={{ marginRight: 20, marginBottom: 20, textDecoration: "none" }}
-                >
-                  <Card
-                    sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", px: 3, py: 2 }}
-                  >
-                    <Box sx={{ mr: 2 }}>
-                      <Typography variant="body2">Create a</Typography>
-                      <Typography variant="h5">New Task</Typography>
                     </Box>
                     <ChevronRightRoundedIcon fontSize="large" />
                   </Card>

@@ -60,17 +60,17 @@ function Layout({
 }) {
   const router = useRouter();
 
-  const {data: session} = useSession()
+  const { data: session } = useSession();
 
   const { user, setUser, setLoading, theme, setTheme } = useContext(AppContext);
-  
+
   useEffect(() => {
     if (!session) {
       if (router) {
         router.push("/");
       }
     }
-  })
+  });
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
@@ -111,7 +111,7 @@ function Layout({
       const value = localStorage.getItem("theme") as string as "light" | "dark";
       if (value != null) setTheme(value);
     }
-  }, [setTheme]); 
+  }, [setTheme]);
 
   const handleThemeChange = () => {
     let value: "light" | "dark" = theme == "light" ? "dark" : "light";
@@ -144,16 +144,16 @@ function Layout({
       label: "My Mentees",
       to: "/mentees",
     },
+    {
+      label: "Tasks",
+      to: "/tasks",
+    },
   ];
 
   const adminLinks = [
     {
       label: "Students",
       to: "/students",
-    },
-    {
-      label: "Tasks",
-      to: "/tasks",
     },
   ];
 
@@ -265,10 +265,7 @@ function Layout({
                 ml: { md: `${drawerWidth}px` },
                 display: { md: "none" },
                 py: 1,
-                background:
-                  theme == "light"
-                    ? "white"
-                    : "",
+                background: theme == "light" ? "white" : "",
               }}
               elevation={trigger ? 4 : 0}
             >
