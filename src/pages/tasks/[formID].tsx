@@ -232,9 +232,9 @@ function ResponsesPage({ form }: { form: FormType }) {
                 )}
               </TabPanel>
               <TabPanel value="assign">
-                {/* {user.mentees!.length > 0 ? ( */}
+                {user.mentees!.length > 0 ? (
                   <BulkDataGrid
-                    data={users.map((d) => {
+                    data={user.mentees!.map((d) => {
                       const handleAssignment = (value: string) => {
                         if (assignedUsers?.indexOf(value) == -1) {
                           console.log("assigning");
@@ -287,13 +287,13 @@ function ResponsesPage({ form }: { form: FormType }) {
                       });
                     })}
                   />
-                {/* ) : (
+                ) : (
                   <Box>
                     <Typography>
                       You don't have mentees to assign task
                     </Typography>
                   </Box>
-                )} */}
+                )}
               </TabPanel>
             </TabContext>
           </Paper>
