@@ -125,8 +125,7 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
-  const { formID } = context.query;
+export async function getStaticProps() {
   const res = await fetch(`${process.env.BACKEND_URI}/user/all`);
   const data = await res.json();
   if (res.status != 200 || data == null) return { notFound: true };

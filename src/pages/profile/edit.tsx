@@ -53,7 +53,7 @@ function ProfilePage() {
   // create handleSubmit function which is triggered on clicking the save button. makes a PUT request to the API
   const handleSubmit = () => {
     setSaving(true);
-    fetch(`/api/user/${user.regno.toLowerCase()}`, {
+    fetch(`/api/user/${user.email}`, {
       method: "PUT",
       body: JSON.stringify(editedFields),
       headers: {
