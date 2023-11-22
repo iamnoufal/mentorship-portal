@@ -35,7 +35,7 @@ function TasksPage({ data }: any) {
 }
 
 // fetch all forms from backend
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetch(`${process.env.BACKEND_URI}/form/all`);
   const data = await resp.json();
   return { props: { data } };

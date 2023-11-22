@@ -10,8 +10,8 @@ function ProfilePage() {
   // fetch user data from context
   const { user, setUser } = useContext(AppContext);
 
-  const handleChangeMentor = async (email: string) => {
-      fetch(`/api/user/${email}`, {
+  const handleChangeMentor = async () => {
+      fetch(`/api/user/${user.email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "mentor" }),
         headers: {
@@ -44,7 +44,7 @@ function ProfilePage() {
               </Button>
             </Link>
             {parseInt(user.year) <= 2025 && user.type === "student" && (
-              <Button variant="contained" sx={{ width: "100%", mt: 3 }}>
+              <Button onClick={handleChangeMentor} variant="contained" sx={{ width: "100%", mt: 3 }}>
                 Be a Mentor
               </Button>
             )}
