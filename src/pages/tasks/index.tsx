@@ -9,7 +9,7 @@ import Link from "next/link";
 function TasksPage({ data }: any) {
   return (
     <Layout title="Forms | Mentorship Portal">
-      <Protected type="admin">
+      <Protected type="mentor">
         <Container maxWidth="md" sx={{ py: 5 }}>
           <Box
             sx={{

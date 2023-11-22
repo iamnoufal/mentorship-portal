@@ -97,7 +97,7 @@ function CreateFormPage() {
 
   return (
     <Layout title="Create Form | Mentorship Portal">
-      <Protected type="admin">
+      <Protected type="mentor">
         <Container maxWidth="md" sx={{ py: 2 }}>
           <Heading>Create a Task</Heading>
           <Box sx={{ py: 3 }}>

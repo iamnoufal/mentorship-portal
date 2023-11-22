@@ -340,7 +340,7 @@ function Layout({
               sx={{
                 flexGrow: 1,
                 p: 3,
-                width: { md: `calc(100% - ${drawerWidth}px)` },
+                width: { md: `calc(100% - ${drawerWidth}px)`, xs: '100%' },
               }}
             >
               <Toolbar sx={{ display: { md: "none" }, my: 1 }} />
