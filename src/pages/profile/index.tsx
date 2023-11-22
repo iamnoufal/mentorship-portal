@@ -43,7 +43,7 @@ function ProfilePage() {
                 Edit Profile
               </Button>
             </Link>
-            {parseInt(user.year) <= 2025 && user.type === "candidate" && (
+            {parseInt(user.year) <= 2025 && user.type === "student" && (
               <Button variant="contained" sx={{ width: "100%", mt: 3 }}>
                 Be a Mentor
               </Button>
