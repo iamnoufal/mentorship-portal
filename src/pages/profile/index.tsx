@@ -11,6 +11,7 @@ function ProfilePage() {
   const { user, setUser } = useContext(AppContext);
 
   const handleChangeMentor = async () => {
+    if (user.skills?.length != 0 && user.hobbies?.length != 0) {
       fetch(`/api/user/${user.email}`, {
         method: "PUT",
         body: JSON.stringify({ type: "mentor" }),
@@ -24,6 +25,9 @@ function ProfilePage() {
             setUser({ ...user, type: "mentor" })
           }
         });
+    } else {
+      alert("Please fill in your skills and hobbies to be a mentor.")
+    }
   };
 
   return (
