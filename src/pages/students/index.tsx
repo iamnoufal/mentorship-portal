@@ -125,7 +125,7 @@ function StudentsPage({ data }: { data: Array<UserType> }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${process.env.BACKEND_URI}/user/all`);
   const data = await res.json();
   if (res.status != 200 || data == null) return { notFound: true };
