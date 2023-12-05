@@ -59,7 +59,7 @@ function SelectMentorPage({ data }: any) {
 }
 
 // fetch available mentors from API before rendering page
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetch(`${process.env.BACKEND_URI}/mentor/available`);
   let data = await resp.json();
   return { props: { data: data } };
