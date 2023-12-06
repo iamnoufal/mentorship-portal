@@ -163,6 +163,40 @@ function Profile({ user, actions }: { user: UserType; actions?: any }) {
               : "None"}
           </Grid>
         </Grid>
+        {(user.type === "mentor" || user.type === "admin") && (
+          <Grid container sx={{ my: 4 }}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{ display: "flex", alignItems: "center" }}
+            >
+              <Typography variant="h6">Mentees</Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={8}
+              sx={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+            >
+              {user.mentees && user!.mentees!.length != 0
+                ? user!.mentees!.map((mentee) => (
+                    <Link
+                      href={`/students/${mentee.email}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                      key={mentee.email}
+                    >
+                      <Chip
+                        label={mentee.name}
+                        key={mentee.email}
+                        sx={{ mr: 1, mt: 2 }}
+                      />
+                    </Link>
+                  ))
+                : "None"}
+            </Grid>
+          </Grid>
+        )}
       </Grid>
       <Grid item xs={12} lg={4} sx={{ mt: { xs: 4, md: 0 } }}>
         <Box

@@ -65,12 +65,12 @@ function Layout({
   const { user, setUser, setLoading, theme, setTheme } = useContext(AppContext);
 
   useEffect(() => {
-    if (!session) {
+    if (session === null) {
       if (router) {
         router.push("/");
       }
     }
-  });
+  }, [session]);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
@@ -104,7 +104,7 @@ function Layout({
         sessionStorage.setItem("next", router.asPath);
         router.push("/");
       });
-  }, [router, setUser, setLoading]);
+  }, [session]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
